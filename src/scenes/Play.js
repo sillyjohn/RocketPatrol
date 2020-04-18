@@ -32,7 +32,7 @@ class Play extends Phaser.Scene {
 
         // add rocket
         this.p1Rocket = new Rocket(this,game.config.width/2,431,'rocket').setScale(0.5,0.5).setOrigin(0,0);
-        this.p2Rocket = new Rocket2(this,game.config.width/2,431,'rocket').setScale(0.5,0.5).setOrigin(0,0);
+        this.p2Rocket = new Rocket2(this,game.config.width/3,431,'rocket').setScale(0.5,0.5).setOrigin(0,0);
 
         // add spaceship
         this.ship01 = new Spaceship(this,game.config.width+192, 132, 'spaceship',0,30).setOrigin(0,0);
