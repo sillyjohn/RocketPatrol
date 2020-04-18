@@ -40,7 +40,7 @@ class Play extends Phaser.Scene {
         this.ship03 = new Spaceship(this,game.config.width, 260, 'spaceship',0,10).setOrigin(0,0);
 
         //define keyboard keys
-        keyF = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
+        keyUP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
         keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
         keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
         keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
@@ -150,7 +150,7 @@ class Play extends Phaser.Scene {
         } //rocket 2
 
        //check key input for restart
-       if(this.gameOver && Phaser.Input.Keyboard.JustDown(keyF)){
+       if(this.gameOver && Phaser.Input.Keyboard.JustDown(keyUP)){
            this.scene.restart('this.p1Score');
        }
        if(this.gameOver && Phaser.Input.Keyboard.JustDown(keyLEFT)){

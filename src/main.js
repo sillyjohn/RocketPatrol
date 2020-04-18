@@ -11,7 +11,7 @@ let highest = 0;
 
 //reserve some keyboard variable
 
-let keyF, keyLEFT,keyRIGHT,keyW,keyA,keyD;
+let keyUP, keyLEFT,keyRIGHT,keyW,keyA,keyD;
 
 //define game setting 
 
