@@ -3,21 +3,22 @@ let config = {
     width: 640,
     height: 480,
     scene:[ Menu, Play ],
+    
 };
 
 let game = new Phaser.Game(config);
-
+let highest = 0;
 
 //reserve some keyboard variable
 
-let keyF, keyLEFT,keyRIGHT;
+let keyF, keyLEFT,keyRIGHT,keyW,keyA,keyD;
 
 //define game setting 
 
 game.settings = {
 
     spaceshipSpeed:3,
-    gameTimer:60000
-
+    gameTimer:60000,
+  
 
 }

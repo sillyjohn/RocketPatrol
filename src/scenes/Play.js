@@ -12,6 +12,7 @@ class Play extends Phaser.Scene {
         this.load.audio('sfx_select', './assets/blip_select12.wav');
         this.load.audio('sfx_explosion', './assets/explosion38.wav');
         this.load.audio('sfx_rocket', './assets/rocket_shot.wav');
+        this.load.audio('background_music','./assets/background.mp3');
     }
     create() {
         //place tile sprite
@@ -31,6 +32,8 @@ class Play extends Phaser.Scene {
 
         // add rocket
         this.p1Rocket = new Rocket(this,game.config.width/2,431,'rocket').setScale(0.5,0.5).setOrigin(0,0);
+        this.p2Rocket = new Rocket2(this,game.config.width/2,431,'rocket').setScale(0.5,0.5).setOrigin(0,0);
+
         // add spaceship
         this.ship01 = new Spaceship(this,game.config.width+192, 132, 'spaceship',0,30).setOrigin(0,0);
         this.ship02 = new Spaceship(this,game.config.width+ 40, 196, 'spaceship',0,20).setOrigin(0,0);
@@ -40,6 +43,9 @@ class Play extends Phaser.Scene {
         keyF = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
         keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
         keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
+        keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
+        keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
+        keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
 
         //animation config
         this.anims.create(
@@ -51,6 +57,9 @@ class Play extends Phaser.Scene {
         );
         //score
         this.p1Score = 0;
+        //highest score
+        
+       console.log(highest);
         //score display
         let scoreConfig = {
             fontFamily: 'Courier',
@@ -64,7 +73,24 @@ class Play extends Phaser.Scene {
             },
             fixedWidth:100
         }
+        let scoreConfig2 = {
+            fontFamily: 'Courier',
+            fontSize: '28px',
+            backgroundColor:'#F3B141',
+            color:'#843605',
+            align:'left',
+            padding:{
+                top: 5,
+                bottom:5,
+            },
+            fixedWidth:300
+        }
+        
+        
         this.scoreLeft = this.add.text(69, 54, this.p1Score,scoreConfig);
+        //display higest score
+        this.add.text(300,54,'Highest Score:'+highest,scoreConfig2);
+      
         //game over flag
         this.gameOver = false;
         //60sec timer
@@ -74,6 +100,10 @@ class Play extends Phaser.Scene {
             this.add.text(game.config.width/2,game.config.height/2+64, '(F)ire to restart or <- for menu', scoreConfig).setOrigin(0.5);    
             this.gameOver = true;
         }, null, this);
+        
+        //add background music
+        this.music = game.sound.add('background_music');
+        this.music.play();
     }
 
     update(){
@@ -83,7 +113,7 @@ class Play extends Phaser.Scene {
         if(!this.gameOver){
             //update rocket
             this.p1Rocket.update();
-
+            this.p2Rocket.update();
             //update spaceship
             this.ship01.update();
             this.ship02.update();
@@ -103,7 +133,22 @@ class Play extends Phaser.Scene {
         if(this.checkCollision(this.p1Rocket,this.ship03)){
             this.p1Rocket.reset();
             this.shipExplode(this.ship03);
+        } //rocket 1
+        
+        if(this.checkCollision(this.p2Rocket,this.ship01)){ 
+            this.p2Rocket.reset();
+            this.shipExplode(this.ship01);
         }
+        if(this.checkCollision(this.p2Rocket,this.ship02)){
+            this.p2Rocket.reset();
+            this.shipExplode(this.ship02);
+
+        }
+        if(this.checkCollision(this.p2Rocket,this.ship03)){
+            this.p2Rocket.reset();
+            this.shipExplode(this.ship03);
+        } //rocket 2
+
        //check key input for restart
        if(this.gameOver && Phaser.Input.Keyboard.JustDown(keyF)){
            this.scene.restart('this.p1Score');
@@ -111,7 +156,13 @@ class Play extends Phaser.Scene {
        if(this.gameOver && Phaser.Input.Keyboard.JustDown(keyLEFT)){
            this.scene.start("menuScene");
        }
-
+        //update highest Score
+       console.log(this.p1Score+"current score");
+       if(this.p1Score > highest){
+        highest = this.p1Score;
+        console.log(highest);
+        console.log(game.settings.gameTimer);
+       }
     }
    
     checkCollision(rocket,ship){
@@ -146,4 +197,10 @@ class Play extends Phaser.Scene {
         this.sound.play('sfx_explosion');
 
     }
+
+       
+
+
+
+    
 }
