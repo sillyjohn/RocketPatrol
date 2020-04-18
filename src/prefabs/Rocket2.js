@@ -27,9 +27,16 @@ update(){
         this.sfxRocket.play();
         }
     //if fired, move up
-    if(this.isFiring && this.y >= 108){
-        this.y -= 12;
+    if(this.isFiring && this.y >= 108 && keyA.isDown){
+        this.y -= 8;
+        this.x += -12;
+    }else if(this.isFiring && this.y >= 108 && keyD.isDown){
+        this.y -= 8;
+        this.x -= -12;
 
+    }else if(this.isFiring && this.y >= 108)
+    {
+        this.y -= 8;
     }
     //reset on miss
     if(this.y <= 108){
