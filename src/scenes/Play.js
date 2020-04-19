@@ -8,15 +8,18 @@ class Play extends Phaser.Scene {
         this.load.image('rocket','./assets/rocket.png');
         this.load.image('spaceship','./assets/spaceship.png');
         this.load.image('starfield','./assets/starfield.png');
+        this.load.image('newStarfield','./assets/TileSprite_2.png');
+        this.load.image('spaceShip2','./assets/spaceShip_2.png');
         this.load.spritesheet('explosion', './assets/explosion.png', {frameWidth: 64, frameHeight: 32, startFrame: 0, endFrame: 9});
         this.load.audio('sfx_select', './assets/blip_select12.wav');
         this.load.audio('sfx_explosion', './assets/explosion38.wav');
         this.load.audio('sfx_rocket', './assets/rocket_shot.wav');
         this.load.audio('background_music','./assets/background.mp3');
+        
     }
     create() {
         //place tile sprite
-        this.starfield = this.add.tileSprite(0,0,640,480,'starfield').setOrigin(0,0);
+        this.starfield = this.add.tileSprite(0,0,640,480,'newStarfield').setOrigin(0,0);
         //display Rocket Patrol Play
         this.add.text(20,20,"Rocket Patrol Play");
         //white rectangle border
@@ -35,9 +38,10 @@ class Play extends Phaser.Scene {
         this.p2Rocket = new Rocket2(this,game.config.width/3,431,'rocket').setScale(0.5,0.5).setOrigin(0,0);
 
         // add spaceship
-        this.ship01 = new Spaceship(this,game.config.width+192, 132, 'spaceship',0,30).setOrigin(0,0);
-        this.ship02 = new Spaceship(this,game.config.width+ 40, 196, 'spaceship',0,20).setOrigin(0,0);
-        this.ship03 = new Spaceship(this,game.config.width, 260, 'spaceship',0,10).setOrigin(0,0);
+        this.ship01 = new Spaceship(this,game.config.width+192, Math.floor(Math.random()*300)+100, 'spaceship',0,30).setOrigin(0,0);
+        this.ship02 = new Spaceship(this,game.config.width+ 40, Math.floor(Math.random()*300)+100, 'spaceship',0,20).setOrigin(0,0);
+        this.ship03 = new Spaceship(this,game.config.width, Math.floor(Math.random()*300)+100, 'spaceship',0,10).setOrigin(0,0);
+        this.ship04 = new Spaceship2(this,game.config.width, Math.floor(Math.random()*300)+100, 'spaceShip2',0,1000).setOrigin(0,0);
 
         //define keyboard keys
         keyUP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
@@ -118,6 +122,7 @@ class Play extends Phaser.Scene {
             this.ship01.update();
             this.ship02.update();
             this.ship03.update();
+            this.ship04.update();
         }
       
         //check collision
@@ -133,7 +138,12 @@ class Play extends Phaser.Scene {
         if(this.checkCollision(this.p1Rocket,this.ship03)){
             this.p1Rocket.reset();
             this.shipExplode(this.ship03);
-        } //rocket 1
+        } 
+        if(this.checkCollision(this.p1Rocket,this.ship04)){
+            this.p1Rocket.reset();
+            this.shipExplode(this.ship04);
+        }
+        //rocket 1
         
         if(this.checkCollision(this.p2Rocket,this.ship01)){ 
             this.p2Rocket.reset();
@@ -147,7 +157,12 @@ class Play extends Phaser.Scene {
         if(this.checkCollision(this.p2Rocket,this.ship03)){
             this.p2Rocket.reset();
             this.shipExplode(this.ship03);
-        } //rocket 2
+        } 
+        if(this.checkCollision(this.p2Rocket,this.ship04)){
+            this.p2Rocket.reset();
+            this.shipExplode(this.ship04);
+        }
+        //rocket 2
 
        //check key input for restart
        if(this.gameOver && Phaser.Input.Keyboard.JustDown(keyUP)){

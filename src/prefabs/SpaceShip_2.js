@@ -1,4 +1,4 @@
-class Spaceship extends Phaser.GameObjects.Sprite {
+class Spaceship2 extends Phaser.GameObjects.Sprite {
     constructor(scene,x,y,texture,frame,pointValue){
         super(scene,x,y,texture,frame);
 
@@ -19,7 +19,7 @@ update(){
 //         this.x -= game.settings.spaceshipSpeed;
 
 //    }
-    this.x -= game.settings.spaceshipSpeed;
+    this.x -= game.settings.spaceshipSpeed*1.5;
     
     //wrap around screen bounds
     if(this.x <= 0 - this.width) {
