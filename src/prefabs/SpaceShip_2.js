@@ -26,10 +26,10 @@ update(){
         this.reset();
     }
 
-    // if(this.y >= 480 + this.height){
-    //     this.reset();
+    if(this.y >= 480 + this.height){
+        this.reset();
 
-    // }
+    }
 }   
 
 reset(){

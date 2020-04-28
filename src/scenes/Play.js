@@ -23,10 +23,10 @@ class Play extends Phaser.Scene {
         //display Rocket Patrol Play
         this.add.text(20,20,"Rocket Patrol Play");
         //white rectangle border
-        this.add.rectangle(5,5,630,32,0xFFFFFF).setOrigin(0,0);
-        this.add.rectangle(5,443,630,32,0xFFFFFF).setOrigin(0,0);
-        this.add.rectangle(5,5,32,455,0xFFFFFF).setOrigin(0,0);
-        this.add.rectangle(603,5,32,455,0xFFFFFF).setOrigin(0,0);
+        // this.add.rectangle(5,5,630,32,0xFFFFFF).setOrigin(0,0);
+        // this.add.rectangle(5,443,630,32,0xFFFFFF).setOrigin(0,0);
+        // this.add.rectangle(5,5,32,455,0xFFFFFF).setOrigin(0,0);
+        // this.add.rectangle(603,5,32,455,0xFFFFFF).setOrigin(0,0);
 
 
 
@@ -35,13 +35,16 @@ class Play extends Phaser.Scene {
 
         // add rocket
         this.p1Rocket = new Rocket(this,game.config.width/2,431,'rocket').setScale(0.5,0.5).setOrigin(0,0);
+        // if(game.settings.twoPlayer == true){
+        //     this.p2Rocket = new Rocket2(this,game.config.width/3,431,'rocket').setScale(0.5,0.5).setOrigin(0,0);
+        // }
         this.p2Rocket = new Rocket2(this,game.config.width/3,431,'rocket').setScale(0.5,0.5).setOrigin(0,0);
-
+        
         // add spaceship
-        this.ship01 = new Spaceship(this,game.config.width+192, Math.floor(Math.random()*300)+100, 'spaceship',0,30).setOrigin(0,0);
-        this.ship02 = new Spaceship(this,game.config.width+ 40, Math.floor(Math.random()*300)+100, 'spaceship',0,20).setOrigin(0,0);
-        this.ship03 = new Spaceship(this,game.config.width, Math.floor(Math.random()*300)+100, 'spaceship',0,10).setOrigin(0,0);
-        this.ship04 = new Spaceship2(this,game.config.width, Math.floor(Math.random()*300)+100, 'spaceShip2',0,1000).setOrigin(0,0);
+        this.ship01 = new Spaceship(this,game.config.width+192, Math.floor(Math.random()*Math.floor(300))+100, 'spaceship',0,30).setOrigin(0,0);
+        this.ship02 = new Spaceship(this,game.config.width+ 40, Math.floor(Math.random()*Math.floor(300))+100, 'spaceship',0,20).setOrigin(0,0);
+        this.ship03 = new Spaceship(this,game.config.width, Math.floor(Math.random()*Math.floor(300))+100, 'spaceship',0,10).setOrigin(0,0);
+        this.ship04 = new Spaceship2(this,game.config.width, Math.floor(Math.random()*Math.floor(300))+100, 'spaceShip2',0,1000).setOrigin(0,0);
 
         //define keyboard keys
         keyUP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);

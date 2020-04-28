@@ -19,6 +19,10 @@ game.settings = {
 
     spaceshipSpeed:3,
     gameTimer:60000,
-  
+    twoPlayer: false,
 
+}
+
+function getRandom(max){
+    return Math.floor(Math.random()*Math.floor(max));
 }
