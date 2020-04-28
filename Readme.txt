@@ -6,3 +6,4 @@ Create a new scrolling tile sprite for the background (10)
 Allow the player to control the Rocket after it's fired (10)
 Create a new spaceship type (w/ new artwork) that's smaller, moves faster, and is worth more points (25)
 Implement a simultaneous two-player mode (50)
+- two player mode are controled by w(shoot),a,d and up(shoot),right,left key
